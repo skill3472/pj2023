@@ -9,11 +9,15 @@ public class playerController : MonoBehaviour
     public Rigidbody2D rb;
     public float jumpForce;
     public float moveSpeed;
+    public float manaCost = 10;
+    public float manaRechargeSpeed = 0.1f;
     public Transform hand;
     [Space] 
     public float damage;
-
+    public float mana = 100;
     public float health = 100;
+
+    private float timer = 0;
 
     // Start is called before the first frame update
     void Start()
@@ -29,6 +33,7 @@ public class playerController : MonoBehaviour
     {
         MoveUpdate();
         RotateTowardsMouse(hand);
+        ManaRecharge();
     }
 
     void MoveUpdate()
@@ -75,13 +80,27 @@ public class playerController : MonoBehaviour
 
     void Shoot()
     {
-        RaycastHit2D hit = Physics2D.Raycast(hand.position, -hand.right);
-        if (hit.collider.gameObject.GetComponent<enemyManager>().enemy != null)
+        if (mana >= manaCost)
         {
-            Enemy enem = hit.collider.gameObject.GetComponent<enemyManager>().enemy;
-            enem.health -= damage;
-            Debug.DrawLine(hand.position, hit.point, Color.red, 2f);
-            
+            mana -= manaCost;
+            RaycastHit2D hit = Physics2D.Raycast(hand.position, -hand.right);
+            if (hit.collider.gameObject.GetComponent<enemyManager>().enemy != null)
+            {
+                Enemy enem = hit.collider.gameObject.GetComponent<enemyManager>().enemy;
+                enem.health -= damage;
+                Debug.DrawLine(hand.position, hit.point, Color.red, 2f);
+
+            }
+        }
+    }
+
+    void ManaRecharge()
+    {
+        timer += Time.deltaTime;
+        if (timer > manaRechargeSpeed && mana < 100)
+        {
+            timer = 0;
+            mana++;
         }
     }
 }
