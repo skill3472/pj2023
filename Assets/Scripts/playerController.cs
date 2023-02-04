@@ -13,6 +13,7 @@ public class playerController : MonoBehaviour
     public float manaCost = 10;
     public float manaRechargeSpeed = 0.1f;
     public Transform hand;
+    public Transform actHand;
     [Space] 
     public float damage;
     public float mana = 100;
@@ -57,6 +58,7 @@ public class playerController : MonoBehaviour
             rb.velocity = new Vector2(-moveSpeed, rb.velocity.y);
             anim.SetBool("isWalking", true);
             gameObject.GetComponentInChildren<SpriteRenderer>().flipX = true;
+            actHand.localPosition = new Vector3(0.7f, 0f, 0f);
         }
 
         else if (Input.GetKey(KeyCode.D))
@@ -64,6 +66,7 @@ public class playerController : MonoBehaviour
             rb.velocity = new Vector2(moveSpeed, rb.velocity.y);
             anim.SetBool("isWalking", true);
             gameObject.GetComponentInChildren<SpriteRenderer>().flipX = false;
+            actHand.localPosition = new Vector3(0f, 0f, 0f);
         }
         else
         {
