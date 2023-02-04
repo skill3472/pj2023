@@ -656,6 +656,8 @@ MonoBehaviour:
   damage: 10
   mana: 100
   health: 100
+  hpbar: {fileID: 1422656507}
+  mpbar: {fileID: 1930727811}
 --- !u!1 &777363504
 GameObject:
   m_ObjectHideFlags: 0
@@ -1171,7 +1173,7 @@ RectTransform:
   m_GameObject: {fileID: 1422656505}
   m_LocalRotation: {x: -0, y: -0, z: 0.7071068, w: 0.7071068}
   m_LocalPosition: {x: 0, y: 0, z: -356}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.1561, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2053802607}
@@ -1765,7 +1767,7 @@ RectTransform:
   m_GameObject: {fileID: 1930727809}
   m_LocalRotation: {x: -0, y: -0, z: 0.7071068, w: 0.7071068}
   m_LocalPosition: {x: 0, y: 0, z: -356}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.3234, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 874868293}

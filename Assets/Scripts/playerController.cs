@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEditor.Search;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class playerController : MonoBehaviour
 {
@@ -16,6 +17,9 @@ public class playerController : MonoBehaviour
     public float damage;
     public float mana = 100;
     public float health = 100;
+    [Space] 
+    public Slider hpbar;
+    public Slider mpbar;
 
     private float timer = 0;
 
@@ -34,6 +38,7 @@ public class playerController : MonoBehaviour
         MoveUpdate();
         RotateTowardsMouse(hand);
         ManaRecharge();
+        UIUpdate();
     }
 
     void MoveUpdate()
@@ -102,5 +107,11 @@ public class playerController : MonoBehaviour
             timer = 0;
             mana++;
         }
+    }
+    
+    void UIUpdate()
+    {
+        hpbar.value = health / 100;
+        mpbar.value = mana / 100;
     }
 }
