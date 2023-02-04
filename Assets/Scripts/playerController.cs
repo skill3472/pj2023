@@ -76,7 +76,7 @@ public class playerController : MonoBehaviour
 
     void RotateTowardsMouse(Transform x)
     {
-        Vector2 positionOnScreen = Camera.main.WorldToViewportPoint (transform.position);
+        Vector2 positionOnScreen = Camera.main.WorldToViewportPoint (hand.position);
         Vector2 mouseOnScreen = (Vector2)Camera.main.ScreenToViewportPoint(Input.mousePosition);
         float angle = AngleBetweenTwoPoints(positionOnScreen, mouseOnScreen);
         x.rotation =  Quaternion.Euler (new Vector3(0f,0f,angle));
