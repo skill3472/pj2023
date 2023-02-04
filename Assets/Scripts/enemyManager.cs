@@ -19,6 +19,8 @@ public class enemyManager : MonoBehaviour
         {
             Die();
         }
+
+        EnemyMovementUpdate();
     }
 
     public void Die()
@@ -38,5 +40,27 @@ public class enemyManager : MonoBehaviour
     void CauseDamage(GameObject x)
     {
         x.GetComponent<playerController>().health -= enemy.damage;
+    }
+
+    void EnemyMovementUpdate()
+    {
+        if (enemy.isRight && transform.position.x < enemy.B.position.x)
+        {
+            gameObject.GetComponent<Rigidbody2D>().velocity =
+                new Vector2(enemy.speed, gameObject.GetComponent<Rigidbody2D>().velocity.y);
+        }
+        else if (!enemy.isRight && transform.position.x > enemy.A.position.x)
+        {
+            gameObject.GetComponent<Rigidbody2D>().velocity =
+                new Vector2(-enemy.speed, gameObject.GetComponent<Rigidbody2D>().velocity.y);
+        }
+        else if (transform.position.x > enemy.B.position.x)
+        {
+            enemy.isRight = false;
+        }
+        else if (transform.position.x < enemy.A.position.x)
+        {
+            enemy.isRight = true;
+        }
     }
 }

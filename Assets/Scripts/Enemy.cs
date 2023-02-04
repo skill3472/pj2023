@@ -9,7 +9,10 @@ public class Enemy
     public float damageCooldown;
     [Range(0f, 100f)]
     public float health = 100f;
+    [Range(0f, 1000f)] 
+    public float speed;
     [Space] 
     public Transform A;
     public Transform B;
+    public bool isRight = true;
 }
