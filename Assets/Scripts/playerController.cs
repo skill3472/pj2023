@@ -20,6 +20,7 @@ public class playerController : MonoBehaviour
     [Space] 
     public Slider hpbar;
     public Slider mpbar;
+    public GameObject deathScreen;
 
     private float timer = 0;
 
@@ -39,6 +40,7 @@ public class playerController : MonoBehaviour
         RotateTowardsMouse(hand);
         ManaRecharge();
         UIUpdate();
+        DeathCheck();
     }
 
     void MoveUpdate()
@@ -113,5 +115,14 @@ public class playerController : MonoBehaviour
     {
         hpbar.value = health / 100;
         mpbar.value = mana / 100;
+    }
+
+    void DeathCheck()
+    {
+        if (health <= 0f)
+        {
+            deathScreen.SetActive(true);
+            Destroy(this.gameObject);
+        }
     }
 }
