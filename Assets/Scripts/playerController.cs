@@ -10,6 +10,10 @@ public class playerController : MonoBehaviour
     public float jumpForce;
     public float moveSpeed;
     public Transform hand;
+    [Space] 
+    public float damage;
+
+    public float health = 100;
 
     // Start is called before the first frame update
     void Start()
@@ -72,9 +76,12 @@ public class playerController : MonoBehaviour
     void Shoot()
     {
         RaycastHit2D hit = Physics2D.Raycast(hand.position, -hand.right);
-        if (hit.collider.gameObject.CompareTag("Enemy"))
+        if (hit.collider.gameObject.GetComponent<enemyManager>().enemy != null)
         {
+            Enemy enem = hit.collider.gameObject.GetComponent<enemyManager>().enemy;
+            enem.health -= damage;
             Debug.DrawLine(hand.position, hit.point, Color.red, 2f);
+            
         }
     }
 }
