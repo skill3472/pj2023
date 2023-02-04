@@ -57,12 +57,14 @@ public class playerController : MonoBehaviour
         {
             rb.velocity = new Vector2(-moveSpeed, rb.velocity.y);
             anim.SetBool("isWalking", true);
+            gameObject.GetComponentInChildren<SpriteRenderer>().flipX = true;
         }
 
         else if (Input.GetKey(KeyCode.D))
         {
             rb.velocity = new Vector2(moveSpeed, rb.velocity.y);
             anim.SetBool("isWalking", true);
+            gameObject.GetComponentInChildren<SpriteRenderer>().flipX = false;
         }
         else
         {
