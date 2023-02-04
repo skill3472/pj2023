@@ -22,6 +22,7 @@ public class playerController : MonoBehaviour
     public Slider mpbar;
     public GameObject deathScreen;
     public audioManager am;
+    public Animator anim;
 
     private float timer = 0;
 
@@ -53,15 +54,18 @@ public class playerController : MonoBehaviour
         if(Input.GetKey(KeyCode.A))
         {
             rb.velocity = new Vector2(-moveSpeed, rb.velocity.y);
+            anim.SetBool("isWalking", true);
         }
 
         else if (Input.GetKey(KeyCode.D))
         {
             rb.velocity = new Vector2(moveSpeed, rb.velocity.y);
+            anim.SetBool("isWalking", true);
         }
         else
         {
             rb.velocity = new Vector2(0f, rb.velocity.y);
+            anim.SetBool("isWalking", false);
         }
         if (Input.GetKeyDown(KeyCode.Mouse0))
         {
