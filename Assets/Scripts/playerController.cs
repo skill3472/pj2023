@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEditor.Search;
@@ -25,7 +26,8 @@ public class playerController : MonoBehaviour
     public Animator anim;
 
     private float timer = 0;
-
+    private bool isGrounded = true;
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -75,7 +77,11 @@ public class playerController : MonoBehaviour
 
     void OnJump()
     {
-        rb.AddForce(Vector2.up * jumpForce);    
+        if (isGrounded)
+        {
+            rb.AddForce(Vector2.up * jumpForce);
+            isGrounded = false;
+        }
     }
 
     void RotateTowardsMouse(Transform x)
@@ -130,5 +136,11 @@ public class playerController : MonoBehaviour
             deathScreen.SetActive(true);
             Destroy(this.gameObject);
         }
+    }
+
+    private void OnCollisionEnter2D(Collision2D col)
+    {
+        if (col.gameObject.layer == 3)
+        isGrounded = true;
     }
 }
