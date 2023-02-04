@@ -57,10 +57,12 @@ public class enemyManager : MonoBehaviour
         else if (transform.position.x > enemy.B.position.x)
         {
             enemy.isRight = false;
+            gameObject.GetComponent<SpriteRenderer>().flipX = true;
         }
         else if (transform.position.x < enemy.A.position.x)
         {
             enemy.isRight = true;
+            gameObject.GetComponent<SpriteRenderer>().flipX = false;
         }
     }
 }
