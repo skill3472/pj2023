@@ -21,6 +21,7 @@ public class playerController : MonoBehaviour
     public Slider hpbar;
     public Slider mpbar;
     public GameObject deathScreen;
+    public audioManager am;
 
     private float timer = 0;
 
@@ -89,6 +90,7 @@ public class playerController : MonoBehaviour
     {
         if (mana >= manaCost)
         {
+            am.Play("Shoot");
             mana -= manaCost;
             RaycastHit2D hit = Physics2D.Raycast(hand.position, -hand.right);
             if (hit.collider.gameObject.GetComponent<enemyManager>().enemy != null)
