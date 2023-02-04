@@ -3097,10 +3097,14 @@ PrefabInstance:
     - target: {fileID: 3979456450269747303, guid: 5672000c76a24d634862bf066165ff27, type: 3}
       propertyPath: sounds.Array.data[0].clip
       value: 
-      objectReference: {fileID: 8300000, guid: 679bec2d132ddc5bbbe8df280f2995ab, type: 3}
+      objectReference: {fileID: 8300000, guid: 64c0f371352185e6b974123b499adc50, type: 3}
     - target: {fileID: 3979456450269747303, guid: 5672000c76a24d634862bf066165ff27, type: 3}
       propertyPath: sounds.Array.data[0].name
       value: Shoot
+      objectReference: {fileID: 0}
+    - target: {fileID: 3979456450269747303, guid: 5672000c76a24d634862bf066165ff27, type: 3}
+      propertyPath: sounds.Array.data[0].pitch
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3979456450269747303, guid: 5672000c76a24d634862bf066165ff27, type: 3}
       propertyPath: sounds.Array.data[0].volume
