@@ -1,6 +1,6 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditor.Search;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -13,6 +13,7 @@ public class playerController : MonoBehaviour
     public float manaCost = 10;
     public float manaRechargeSpeed = 0.1f;
     public Transform hand;
+    public Transform actHand;
     [Space] 
     public float damage;
     public float mana = 100;
@@ -25,7 +26,8 @@ public class playerController : MonoBehaviour
     public Animator anim;
 
     private float timer = 0;
-
+    private bool isGrounded = true;
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -55,12 +57,16 @@ public class playerController : MonoBehaviour
         {
             rb.velocity = new Vector2(-moveSpeed, rb.velocity.y);
             anim.SetBool("isWalking", true);
+            gameObject.GetComponentInChildren<SpriteRenderer>().flipX = true;
+            actHand.localPosition = new Vector3(0.7f, 0f, 0f);
         }
 
         else if (Input.GetKey(KeyCode.D))
         {
             rb.velocity = new Vector2(moveSpeed, rb.velocity.y);
             anim.SetBool("isWalking", true);
+            gameObject.GetComponentInChildren<SpriteRenderer>().flipX = false;
+            actHand.localPosition = new Vector3(0f, 0f, 0f);
         }
         else
         {
@@ -75,7 +81,11 @@ public class playerController : MonoBehaviour
 
     void OnJump()
     {
-        rb.AddForce(Vector2.up * jumpForce);    
+        if (isGrounded)
+        {
+            rb.AddForce(Vector2.up * jumpForce);
+            isGrounded = false;
+        }
     }
 
     void RotateTowardsMouse(Transform x)
@@ -130,5 +140,11 @@ public class playerController : MonoBehaviour
             deathScreen.SetActive(true);
             Destroy(this.gameObject);
         }
+    }
+
+    private void OnCollisionEnter2D(Collision2D col)
+    {
+        if (col.gameObject.layer == 3)
+        isGrounded = true;
     }
 }
