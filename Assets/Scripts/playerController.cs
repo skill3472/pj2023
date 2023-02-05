@@ -22,6 +22,7 @@ public class playerController : MonoBehaviour
     public Slider hpbar;
     public Slider mpbar;
     public GameObject deathScreen;
+    public GameObject winScreen;
     public audioManager am;
     public Animator anim;
     [Space] public LineRenderer line;
@@ -156,7 +157,9 @@ public class playerController : MonoBehaviour
     private void OnCollisionEnter2D(Collision2D col)
     {
         if (col.gameObject.layer == 3)
-        isGrounded = true;
+            isGrounded = true;
+        if (col.gameObject.CompareTag("Finish"))
+            Win();
     }
 
     private IEnumerator lazar(Vector3 start, Vector3 end)
@@ -166,6 +169,11 @@ public class playerController : MonoBehaviour
         yield return new WaitForSeconds(0.1f);
         line.SetPosition(0, far);
         line.SetPosition(1, far);
+    }
+
+    private void Win()
+    {
+        winScreen.SetActive(true);
     }
     
 }
