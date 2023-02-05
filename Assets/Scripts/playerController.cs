@@ -160,6 +160,8 @@ public class playerController : MonoBehaviour
             isGrounded = true;
         if (col.gameObject.CompareTag("Finish"))
             Win();
+        if (col.gameObject.CompareTag("Spike"))
+            health = 0;
     }
 
     private IEnumerator lazar(Vector3 start, Vector3 end)
