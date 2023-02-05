@@ -33,10 +33,8 @@ public class playerController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        if(rb==null)
-        {
-            rb = gameObject.GetComponent<Rigidbody2D>();
-        }
+        if (rb == null) rb = gameObject.GetComponent<Rigidbody2D>();
+        am = GameObject.Find("AudioManager").GetComponent<audioManager>();
     }
 
     // Update is called once per frame
