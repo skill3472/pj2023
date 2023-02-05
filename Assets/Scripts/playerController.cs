@@ -24,9 +24,12 @@ public class playerController : MonoBehaviour
     public GameObject deathScreen;
     public audioManager am;
     public Animator anim;
-
+    [Space] public LineRenderer line;
+    public float maxRayDist = 100;
+    
     private float timer = 0;
     private bool isGrounded = true;
+    private Vector3 far = new Vector3(1000, 1000, 1000);
     
     // Start is called before the first frame update
     void Start()
@@ -107,12 +110,20 @@ public class playerController : MonoBehaviour
             am.Play("Shoot");
             mana -= manaCost;
             RaycastHit2D hit = Physics2D.Raycast(hand.position, -hand.right);
-            if (hit.collider.gameObject.GetComponent<enemyManager>().enemy != null)
+            if (hit)
             {
-                Enemy enem = hit.collider.gameObject.GetComponent<enemyManager>().enemy;
-                enem.health -= damage;
-                Debug.DrawLine(hand.position, hit.point, Color.red, 2f);
+                StartCoroutine(lazar(hand.position, hit.point));
+                if (hit.collider.gameObject.GetComponent<enemyManager>().enemy != null)
+                {
+                    Enemy enem = hit.collider.gameObject.GetComponent<enemyManager>().enemy;
+                    enem.health -= damage;
+                    Debug.DrawLine(hand.position, hit.point, Color.red, 2f);
 
+                }
+            }
+            else
+            {
+                StartCoroutine(lazar(hand.position, -hand.right * maxRayDist));
             }
         }
     }
@@ -147,4 +158,14 @@ public class playerController : MonoBehaviour
         if (col.gameObject.layer == 3)
         isGrounded = true;
     }
+
+    private IEnumerator lazar(Vector3 start, Vector3 end)
+    {
+        line.SetPosition(0, start);
+        line.SetPosition(1, end);
+        yield return new WaitForSeconds(0.1f);
+        line.SetPosition(0, far);
+        line.SetPosition(1, far);
+    }
+    
 }
